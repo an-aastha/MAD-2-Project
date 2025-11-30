@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Monthly Parking Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-3 text-center">Monthly Parking Summary</h1>
+        <p>Hello {{ data['username'] }},</p>
+
+        {% if data['reservations'] %}
+            <p>Here are your parking transactions for this month:</p>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Lot</th>
+                        <th>Vehicle</th>
+                        <th>Spot</th>
+                        <th>Booking</th>
+                        <th>Release</th>
+                        <th>Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for res in data['reservations'] %}
+                    <tr>
+                        <td>{{ res['lot'] }}</td>
+                        <td>{{ res['vehicle'] }}</td>
+                        <td>{{ res['spot'] }}</td>
+                        <td>{{ res['booked_at'] }}</td>
+                        <td>{{ res['released_at'] }}</td>
+                        <td>{{ res['cost'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>You haven’t made any reservations this month.</p>
+        {% endif %}
+
+        <p>Thank you for using our service!</p>
+        <p class="text-muted">— Vehicle Parking App Team</p>
+    </div>
+</body>
+</html>
